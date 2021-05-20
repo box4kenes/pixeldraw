@@ -1,8 +1,11 @@
-import React, { useState } from "react";
-
+import React, { useState,useEffect} from "react";
+import axios from 'axios';
 import { connect } from "react-redux";
-
+import {getDraw} from "../redux/action"
 const HistoryDraw = (props) => {
+  useEffect(()=>{
+    props.getDraw()
+  },[])
 const {drawHistory, setDrawHistory, getFieldFromHistory,getDrawFromServer} = props;
 const [historyInp, setHistoryInp] = useState("");
 
@@ -13,6 +16,8 @@ const addToDrawHistory = () => {
     setHistoryInp("");
   }
 };
+
+
 
   return <div className="drawHistory mg-10">
 
@@ -31,7 +36,7 @@ const addToDrawHistory = () => {
     onChange={(e) => setHistoryInp(e.target.value)}
   />
   <button onClick={addToDrawHistory}>Save</button>
-  <button onClick={getDrawFromServer}>GET draw</button>
+  <button onClick={getDraw}>GET draw</button>
 
 </div>
   
@@ -42,6 +47,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  
   setDrawHistory: (historyTitle) =>
     dispatch({
       type: "SAVE_HISTORY_TITLE",
@@ -54,12 +60,7 @@ const mapDispatchToProps = (dispatch) => ({
       payload: {index},
 
     }),
-    getDrawFromServer: () =>
-    dispatch({
-      type: "GET_DRAW_FROM_SERVER",
-    
-    }),
-
+  getDraw:()=>dispatch(getDraw())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HistoryDraw);

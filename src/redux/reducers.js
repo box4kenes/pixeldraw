@@ -46,28 +46,22 @@ const fieldDraw = (state = initialState, action) => {
       field: state.field, 
       pixelSize: state.pixelSize,
       fieldSize: state.fieldSize,
-      username:"Roman"
+      username:"Keness"
     }
-    axios.post('http://localhost:5000/draw', newDraw)
+    axios.post('https://draw-pixel-server.herokuapp.com/draw', newDraw)
     .then(function (res) {
       console.log(res);
     })
-      return { ...state, drawHistory:[...state.drawHistory, newDraw
-       ]};
+      return { ...state, drawHistory:[...state.drawHistory, newDraw ]};
       
     case "GET_FIELD_FROM_HISTORY":
       return { ...state,...state.drawHistory[action.payload.index]}
 
-      case "GET_DRAW_FROM_SERVER":
-let hisoryArr = []
-        axios.get('http://localhost:5000/draw')
-        .then(function (res) {
-          console.log(res.data)
-hisoryArr = res.data
-          return { ...state, drawHistory: res.data }
-        })
-        return { ...state , drawHistory: hisoryArr }
+      case "GET_DRAWS_FROM_SERVER":
+        return { ...state , drawHistory: action.payload}
           
+      case "GET_PIXEL_COLOR":
+        return {...state,currentColor:state.field[action.payload.index].color}
 
     
         

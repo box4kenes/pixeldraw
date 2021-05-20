@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import {useState} from "react"
 const Field = (props) => {
-const {field, pixelSize,changePixelColor, gridMap}=props
+const {field, pixelSize,changePixelColor, gridMap,getPixelColor}=props
 const [continueToDraw, setContinueToDraw] = useState(false);
 const onKeyPressed = (e) => {
   if (e.code === "Space" || e.type === "mousedown") {
@@ -13,6 +13,16 @@ const onKeyUp = (e) => {
   if (e.code === "Space" || e.type === "mouseup") {
     setContinueToDraw(false);
   }}
+  const changeColor = (event,i) => {
+    if(event.button === 1){
+     getPixelColor(i)
+      
+    }else{
+      changePixelColor(i)
+    }
+    
+  }
+
   return <div
     className="grid"
     onMouseDown={onKeyPressed}
@@ -30,7 +40,7 @@ const onKeyUp = (e) => {
 
         }}
         // {continueToDraw ? `onMouseOver={() => changePixelColor(${i})}` : `onClick={() => changePixelColor(${i})}`}
-        onClick={() => changePixelColor(i)}
+        onMouseDown={() => changeColor(event,i)}
         onMouseOver={() => changePixelColor(continueToDraw ? i : undefined)}
       >
         {" "}
@@ -40,7 +50,6 @@ const onKeyUp = (e) => {
   </div>
 
 }
-
 const mapStateToProps = (state) => ({
   field: state.field,
  pixelSize: state.pixelSize,
@@ -54,7 +63,12 @@ const mapDispatchToProps = (dispatch) => ({
       payload: {index},
 
     }),
+    getPixelColor: (index) =>
+    dispatch({
+      type: "GET_PIXEL_COLOR",
+      payload: {index},
 
+    }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Field);
