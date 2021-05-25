@@ -1,15 +1,16 @@
 import "./styles.css";
-import { connect } from "react-redux";
+import { connect,useState } from "react-redux";
 // import { v4 as uuidv4 } from "uuid";
 import Field from "./Components/Field"
 import ToolsBar from "./Components/ToolsBar";
 import ChangeColor from "./Components/ChangeColor"
 function App(props) {
-
+ 
  
   return (
     <div className="App">
         <ToolsBar/>
+      
         <Field/>
 
     </div>

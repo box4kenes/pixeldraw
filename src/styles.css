@@ -1,3 +1,6 @@
+body{
+  background: gray;
+}
 .grid {
   border: 3px solid black;
   width: 800px;
@@ -29,4 +32,42 @@
 }
 .mg-10{
   margin:10px;
+}
+
+.list-li{
+  background: rgb(236, 255, 197);
+  border: 1px solid rgb(194, 255, 71);
+padding: 2px 5px;
+margin: 5px 3px 5px ;
+border-radius: 4px;
+}
+.list-li:hover{
+  background: rgb(210, 247, 135);
+}
+.list-li:active{
+  background: rgb(250, 242, 137);
+  border: 1px solid rgb(111, 71, 255);
+}
+
+.list-wrap{
+width: 200px;
+}
+.item_wrap{
+ display:flex;
+ justify-content: space-between;
+ 
+}
+.btn{
+  color:white;
+  border:none;
+  background-color:rgba(225, 53, 53, 0.871);
+  border-radius:5px;
+  
+}
+.child-grow{
+  flex-grow:1
+}
+
+.list-ul{
+  list-style-type: none;
 }

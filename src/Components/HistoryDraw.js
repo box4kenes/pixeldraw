@@ -21,15 +21,7 @@ const addToDrawHistory = () => {
 
   return <div className="drawHistory mg-10">
 
-  <select size="5" width="100px" height="100px">
-    {drawHistory.map((el, i) => (
-      <option 
-      onClick={() => getFieldFromHistory(i)}
-      >{el.name}</option>
-    ))}
-  </select>
-  <br />
-  <input
+<input
     value={historyInp}
     maxlength="15"
     size="17"
@@ -37,7 +29,22 @@ const addToDrawHistory = () => {
   />
   <button onClick={addToDrawHistory}>Save</button>
   <button onClick={getDraw}>GET draw</button>
+ 
 
+        <ul className="list-ul">
+    {drawHistory.map((item,i)=> 
+    
+    <li className="list-li">
+      <div className= "item_wrap"> 
+      <div className="child-grow" onClick={() => getFieldFromHistory(i)}>{item.name}</div> 
+      
+      <div><button className="btn">X</button></div>
+      
+      </div>
+      
+      </li>)}
+    </ul>
+    
 </div>
   
 }
